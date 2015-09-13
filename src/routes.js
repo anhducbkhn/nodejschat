@@ -34,7 +34,7 @@ module.exports = function(app,io){
 
 	// Initialize a new socket.io application, named 'chat'
 	var chat = io.on('connection', function (socket) {
-
+            
 		// When the client emits the 'load' event, reply with the 
 		// number of people in this chat room
 
@@ -155,5 +155,3 @@ function findClientsSocket(io,roomId, namespace) {
 	}
 	return res;
 }
-
-

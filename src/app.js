@@ -22,4 +22,18 @@ var io = require('socket.io').listen(app.listen(port));
 require('./config')(app, io);
 require('./routes')(app, io);
 
+var redis = require('redis');
+var client = redis.createClient()
+, subscriber = redis.createClient()
+, publisher = redis.createClient();
+
+subscriber.on('message',function(channel,message){
+   console.log('Message :'+message+" on channel "+channel+ " arrived");
+   io.sockets.emit('receive',{msg: message, user:'redis', img: 'xx'});
+});
+
+subscriber.subscribe('test');
+//publisher.publish("test", "haaaaai");
+
+
 console.log('Your application is running on http://localhost:' + port);
